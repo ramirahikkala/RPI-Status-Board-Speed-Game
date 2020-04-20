@@ -66,8 +66,10 @@ class SpeedGame:
         while True:
             button = self.button_press_queue.get()
             # Omit button glitches
-            if self.previous_press.duration < 0.05:
+            if self.previous_press.duration < 0.2:
+                print("glitch")
                 continue
+            self.previous_press.restart()
             led_shown = self.led_shown_queue.get()
             if button != led_shown:
                 self.game_over_event.set()
